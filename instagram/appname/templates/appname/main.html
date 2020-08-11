@@ -1,0 +1,288 @@
+{% extends 'appname/base.html' %}
+
+{% block header %}
+<header class="masthead text-center text-white">
+  <br>
+  
+</header>
+{% endblock %}
+
+{% block content %}
+{% load static %}
+ 
+<style>
+  /* The Modal (background) */
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 30%; /* Could be more or less, depending on screen size */
+
+  }
+  #follow {
+     color:  #4229b6;
+    
+   }
+</style>
+	<!-- The Modal -->
+  <div id="mymodal1" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+
+      <p style="text-align: center;">
+        <span style="font-size: 14pt;"><b><span style="font-size: 24pt;">기프티콘 응모하기</span></b></span>
+      </p>
+      <p style="text-align: center; line-height: 1.5;">
+        <br />
+      </p>
+     
+      <p style="text-align: center; line-height: 1.5;">
+        <b><span style="color: rgb(255, 0, 0); font-size: 14pt;">선착순 1명</span></b>
+      </p>
+     
+      <p style="text-align: center; line-height: 1.5;">
+        <span style="font-size: 14pt;">
+          <br />
+        </span>
+      </p>
+      <p>
+        <br />
+      </p>
+      <div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;" onClick="closeWin();">
+        <span class="pop_bt" style="font-size: 13pt;" > 닫기 </span>
+      </div>
+    </div>
+
+  </div>
+  <!--End Modal-->
+  <script type="text/javascript">
+
+
+    function openWin(winName) {
+      var blnCookie = getCookie(winName);
+      var obj = eval("window." + winName);
+      if (!blnCookie) {
+        obj.style.display = "block";
+      }
+    }
+
+    // 창닫기
+    function closeWin(winName, expiredays) {
+      setCookie(winName, "done", expiredays);
+      var obj = eval("window." + winName);
+      $('#mymodal1').hide();
+    }
+
+    function closeWinAt00(winName, expiredays) {
+      setCookieAt00(winName, "done", expiredays);
+      var obj = eval("window." + winName);
+      $('#mymodal1').hide();
+    }
+
+    // 쿠키 가져오기
+    function getCookie(name) {
+      var nameOfCookie = name + "=";
+      var x = 0;
+      while (x <= document.cookie.length) {
+        var y = (x + nameOfCookie.length);
+        if (document.cookie.substring(x, y) == nameOfCookie) {
+          if (( endOfCookie = document.cookie.indexOf(";", y)) == -1)
+            endOfCookie = document.cookie.length;
+          return unescape(document.cookie.substring(y, endOfCookie));
+        }
+        x = document.cookie.indexOf(" ", x) + 1;
+        if (x == 0)
+          break;
+      }
+      return "";
+    }
+
+    // 24시간 기준 쿠키 설정하기
+    // expiredays 후의 클릭한 시간까지 쿠키 설정
+    function setCookie(name, value, expiredays) {
+      var todayDate = new Date();
+      todayDate.setDate(todayDate.getDate() + expiredays);
+      document.cookie = name + "=" + escape(value) + "; path=/; expires=" + todayDate.toGMTString() + ";"
+    }
+
+    //팝업 Close 기능
+    function close_pop(flag) {
+      $('#myModal').hide();
+    };
+    function go_pop(flag) {
+
+      location.href = "rotate.html", '팝업', 'width=300, height=300, menubar=no, status=no, toolbar=no';
+
+    };
+
+  </script>
+
+<div class="padding">
+
+  <div class="full col-sm-9">
+    
+    <!-- content -->                      
+    <div class="row">
+      
+     <!-- main col left --> 
+     <div class="col-sm-3">
+       
+        <div class="panel panel-default">  
+   
+
+        <div class="panel-thumbnail"><img src="{{ user.profile_image.url }}" class="img-responsive" width=350 height=200></div>
+        
+      
+        <div class="panel-body">
+          <p class="lead">{{user.nickname}}님</p>
+          <a href="{% url 'profile' %}" class="lead">프로필 상세정보</p></a>
+        </div>
+        </div>
+
+       
+        <div class="panel panel-default">
+        <h4>회원님을 위한 추천</h4>
+        {% for user in users %}
+       
+        <div class="panel-heading"><svg width="2em" height="1em" viewBox="0 0 16 16" class="bi bi-person-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"/>
+          <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+          <path fill-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"/>
+        </svg>&nbsp{{user.nickname}} <a href="{% url 'profile' %}" id="follow">팔로우</a></div>
+        
+        {% endfor %}
+          <div class="panel-body">
+          <div class="list-group">
+            <a href="http://usebootstrap.com/theme/facebook" class="list-group-item">Modal / Dialog</a>
+            <a href="http://usebootstrap.com/theme/facebook" class="list-group-item">Datetime Examples</a>
+            <a href="http://usebootstrap.com/theme/facebook" class="list-group-item">Data Grids</a>
+          </div>
+          </div>
+        </div>
+       
+        <div class="well"> 
+           <form class="form-horizontal" role="form">
+          <h4>What's New</h4>
+           <div class="form-group" style="padding:14px;">
+            <textarea class="form-control" placeholder="Update your status"></textarea>
+          </div>
+          <button class="btn btn-primary pull-right" type="button">Post</button><ul class="list-inline"><li><a href=""><i class="glyphicon glyphicon-upload"></i></a></li><li><a href=""><i class="glyphicon glyphicon-camera"></i></a></li><li><a href=""><i class="glyphicon glyphicon-map-marker"></i></a></li></ul>
+          </form>
+        </div>
+       
+        <div class="panel panel-default">
+         <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4>More Templates</h4></div>
+          <div class="panel-body">
+          <img src="assets/img/150x150.gif" class="img-circle pull-right"> <a href="#">Free @Bootply</a>
+          <div class="clearfix"></div>
+          There a load of new free Bootstrap 3
+ready templates at Bootply. All of these templates are free and don't 
+require extensive customization to the Bootstrap baseline.
+          <hr>
+          <ul class="list-unstyled"><li><a href="http://usebootstrap.com/theme/facebook">Dashboard</a></li><li><a href="http://usebootstrap.com/theme/facebook">Darkside</a></li><li><a href="http://usebootstrap.com/theme/facebook">Greenfield</a></li></ul>
+          </div>
+        </div>
+       
+        <div class="panel panel-default">
+        <div class="panel-heading"><h4>What Is Bootstrap?</h4></div>
+        <div class="panel-body">
+          Bootstrap is front end frameworkto 
+build custom web applications that are fast, responsive &amp; intuitive.
+It consist of CSS and HTML for typography, forms, buttons, tables, 
+grids, and navigation along with custom-built jQuery plug-ins and 
+support for responsive layouts. With dozens of reusable components for 
+navigation, pagination, labels, alerts etc..                          </div>
+        </div>
+
+        
+       
+      </div>
+      {% for post in posts %}
+      <!-- main col right -->
+      <div class="col-sm-6">
+    
+        
+      
+        </a><div class="panel panel-default">
+         <div class="panel-heading"><h3><a href="">{{post.writer}}</a></h3>{{post.post_date}} <a href="{% url 'profile' %}" id="follow">{{post.location}}</a></div>
+          <div class="panel-body">
+          <h4>{{post.content}}&nbsp&nbsp</h4>
+          
+          <div class="clearfix"></div>
+         
+          
+          {% if post.image %}
+          <img class="img-fluid rounded-circle" src="{{ post.image.url }}" alt="" width=600 height=350>
+          {% endif %}
+          <br>
+         
+          <br>
+          <span>
+            관련 해시태그
+            {% for hashtag in post.hashtags.all %}
+            <a href="/hashtag/{{ hashtag.name }}">{{ hashtag.name }}</a>
+            {% endfor %}
+            <br>
+          </span>
+          <br>
+          <a href="{% url 'update' pk=post.pk %}">수정하기</a>
+          <a href="{% url 'delete' pk=post.pk %}">삭제하기</a>
+          <hr>
+          <p>좋아요 {{ post.likes.count}}개</p>
+        
+        <a href="{% url 'like' pk=post.pk %}">
+          {% if user in post.likes.all %}
+          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+          </svg>
+          {% else %}
+          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+          </svg>
+          {% endif %}
+        </a>
+        {% for comment in post.comments.all %}
+        <p> {{ comment.c_writer}} : {{ comment.text }}</p>
+        {% endfor %}
+        <form method="POST" action='/comment/{{ post.id }}'>
+        {% csrf_token %}
+        {{ comment_form.as_p}}
+        <input type="submit" value="submit">
+        </form>
+        <br>
+       
+        
+          
+          </div>
+         </div>
+
+    
+    
+  </div><!-- /col-9 -->
+  {% endfor %}
+</div><!-- /padding -->
+</div>
+<!-- /main -->
+
+</div>
+<!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  -->
+
+
+
+{% endblock %}
