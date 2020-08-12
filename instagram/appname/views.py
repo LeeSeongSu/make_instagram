@@ -60,7 +60,7 @@ def update(request, pk):
         return render(request, 'appname/signin.html', {'signin_form': signin_form})
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
-        form = PostForm(request.POST, instance=post)
+        form = PostForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
             form = form.save(commit=False)
             form.save()

@@ -1,4 +1,4 @@
-"""projectname URL Configuration
+"""instagram URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.0/topics/http/urls/
@@ -37,5 +37,6 @@ urlpatterns = [
     path('profile', appname.views.profile, name='profile'),
     path('profile_update/', appname.views.profile_update, name='profile_update'),
     path('search', appname.views.search, name='search'),
+    path('accounts/', include('allauth.urls')),
     path('',include('django.contrib.auth.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

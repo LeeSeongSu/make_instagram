@@ -255,7 +255,9 @@ overflow:hidden;
                 </div>
                 <div class="col-md-6 no-pad"> 
                     <div class="user-image">
-                        <img src="{{ user.profile_image.url }}" class="img-responsive thumbnail">
+                      {% if user.profile_image %}
+                        <img src="{{ user.profile_image.url }}" class="img-responsive thumbnail" alt="img">
+                      {% endif %}
                     </div>
                 </div>
             </div>

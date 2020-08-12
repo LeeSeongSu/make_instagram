@@ -146,7 +146,12 @@
         <div class="panel panel-default">  
    
 
-        <div class="panel-thumbnail"><img src="{{ user.profile_image.url }}" class="img-responsive" width=350 height=200></div>
+        <div class="panel-thumbnail">
+          {% if user.profile_image %}
+          <img src="{{ user.profile_image.url }}" class="img-responsive" width=350 height=200 alt="img">
+          {% endif %}
+       
+        </div>
         
       
         <div class="panel-body">
@@ -220,18 +225,18 @@ navigation, pagination, labels, alerts etc..                          </div>
         
       
         </a><div class="panel panel-default">
-         <div class="panel-heading"><h3><a href="">{{post.writer}}</a></h3>{{post.post_date}}</div>
+         <div class="panel-heading"><h3><a href="{% url 'profile' %}">{{post.writer}}</a></h3>{{post.post_date}} <a href="" id="follow"></a>{{post.location}}</div>
           <div class="panel-body">
-          <h4>{{post.title}}&nbsp&nbsp<a href="{% url 'profile' %}" id="follow">{{post.location}}</a></h4>
+          <h4>{{post.content}}&nbsp&nbsp</h4>
           
           <div class="clearfix"></div>
-          <hr>
+         
           
           {% if post.image %}
           <img class="img-fluid rounded-circle" src="{{ post.image.url }}" alt="" width=600 height=350>
           {% endif %}
-          <br><br><br>
-          <h4><p>{{post.content}}</p></h4>
+          <br>
+         
           <br>
           <span>
             관련 해시태그
@@ -241,8 +246,10 @@ navigation, pagination, labels, alerts etc..                          </div>
             <br>
           </span>
           <br>
-          <a href="{% url 'update' pk=post.pk %}">수정하기</a>
-          <a href="{% url 'delete' pk=post.pk %}">삭제하기</a>
+          {% if user == post.writer %}
+          <a href="{% url 'update' pk=post.pk %}">수정하기</a>        
+          <a href="{% url 'delete' pk=post.pk %}">삭제하기</a>         
+          {% endif %}
           <hr>
           <p>좋아요 {{ post.likes.count}}개</p>
         
