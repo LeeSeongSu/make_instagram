@@ -1,6 +1,5 @@
 {% extends 'appname/base.html' %}
-{% load socialaccount %}
-{% providers_media_js %}
+
 {%load static%}
 
 {% block header %}
@@ -282,7 +281,7 @@ input[type=text]:placeholder {
     {% csrf_token %}
     {{ signin_form.as_p}}
     <input type="submit" value="submit">
-    <a href="{% provider_login_url 'google' %}"><img src="{% static 'appname/img/btn_google_signin_dark_focus_web@2x.png' %}" width="250" height="50"></a>
+   
 </form>
  
 {% endblock %}

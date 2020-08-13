@@ -35,22 +35,13 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
-    
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'appname.apps.AppnameConfig',
-
-    'django.contrib.sites',
-    # allauth
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-
-    #provider 구글 페이스북 카톡 깃헙
-    'allauth.socialaccount.providers.google',
-    'allauth.socialaccount.providers.facebook',
+    
+   
     
 ]
 
@@ -148,13 +139,3 @@ LOGOUT_REDIRECT_URL = 'main'
 
 AUTH_USER_MODEL = 'appname.CustomUser'
 
-AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
-)
-
-SITE_ID = 1
-LOGIN_REDIRECT_URL = '/'
-ACCOUNT_LOGOUT_ON_GET = True
-# 로그인5회 이상 틀리면 방지문자
-# 아이디에 꼭 이메일 형식 입력
