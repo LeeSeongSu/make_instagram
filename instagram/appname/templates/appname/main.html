@@ -38,6 +38,7 @@
      color:  #4229b6;
     
    }
+   
 </style>
 	
 
@@ -80,49 +81,14 @@
         </svg>&nbsp{{user.nickname}} <a href="{% url 'profile' %}" id="follow">팔로우</a></div>
         
         {% endfor %}
-          <div class="panel-body">
-          <div class="list-group">
-            <a href="http://usebootstrap.com/theme/facebook" class="list-group-item">Modal / Dialog</a>
-            <a href="http://usebootstrap.com/theme/facebook" class="list-group-item">Datetime Examples</a>
-            <a href="http://usebootstrap.com/theme/facebook" class="list-group-item">Data Grids</a>
-          </div>
-          </div>
+        
         </div>
        
-        <div class="well"> 
-           <form class="form-horizontal" role="form">
-          <h4>What's New</h4>
-           <div class="form-group" style="padding:14px;">
-            <textarea class="form-control" placeholder="Update your status"></textarea>
-          </div>
-          <button class="btn btn-primary pull-right" type="button">Post</button><ul class="list-inline"><li><a href=""><i class="glyphicon glyphicon-upload"></i></a></li><li><a href=""><i class="glyphicon glyphicon-camera"></i></a></li><li><a href=""><i class="glyphicon glyphicon-map-marker"></i></a></li></ul>
-          </form>
-        </div>
        
-        <div class="panel panel-default">
-         <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4>More Templates</h4></div>
-          <div class="panel-body">
-          <img src="assets/img/150x150.gif" class="img-circle pull-right"> <a href="#">Free @Bootply</a>
-          <div class="clearfix"></div>
-          There a load of new free Bootstrap 3
-ready templates at Bootply. All of these templates are free and don't 
-require extensive customization to the Bootstrap baseline.
-          <hr>
-          <ul class="list-unstyled"><li><a href="http://usebootstrap.com/theme/facebook">Dashboard</a></li><li><a href="http://usebootstrap.com/theme/facebook">Darkside</a></li><li><a href="http://usebootstrap.com/theme/facebook">Greenfield</a></li></ul>
-          </div>
-        </div>
        
-        <div class="panel panel-default">
-        <div class="panel-heading"><h4>What Is Bootstrap?</h4></div>
-        <div class="panel-body">
-          Bootstrap is front end frameworkto 
-build custom web applications that are fast, responsive &amp; intuitive.
-It consist of CSS and HTML for typography, forms, buttons, tables, 
-grids, and navigation along with custom-built jQuery plug-ins and 
-support for responsive layouts. With dozens of reusable components for 
-navigation, pagination, labels, alerts etc..                          </div>
-        </div>
-
+      
+       
+      
         
        
       </div>
@@ -149,7 +115,7 @@ navigation, pagination, labels, alerts etc..                          </div>
           <span>
             관련 해시태그
             {% for hashtag in post.hashtags.all %}
-            <a href="/hashtag/{{ hashtag.name }}">{{ hashtag.name }}</a>
+            <a href="/hashtag/{{ hashtag.name }}" style="color: blue;">{{ hashtag.name }}</a>
             {% endfor %}
             <br>
           </span>
